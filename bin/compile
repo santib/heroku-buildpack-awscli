@@ -45,8 +45,10 @@ cat > "${BUILD_DIR}/.profile.d/awscli.sh" <<'PROFILE'
 export PATH="/app/.awscli/bin:${PATH}"
 PROFILE
 
+CODEARTIFACT_AUTH_TOKEN=`/app/.awscli/bin/aws codeartifact get-authorization-token --domain career-agents --domain-owner 419767938987 --region us-east-1 --query authorizationToken --output text`
 cat > "${BUILDPACK_DIR}/export" <<'EXPORT'
 export PATH="/app/.awscli/bin:${PATH}"
+export CODEARTIFACT_AUTH_TOKEN=${CODEARTIFACT_AUTH_TOKEN}
 EXPORT
 
 rm -rf "${TMP_DIR}"
